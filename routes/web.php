@@ -1,0 +1,13 @@
+<?php
+
+use Illuminate\Support\Facades\Route;
+
+use App\Http\Controllers\Auth\LoginForm;
+use App\Http\Controllers\Auth\ForgotPasswordForm;
+use App\Http\Controllers\Portal\PortalPage;
+use App\Http\Controllers\Portal\ApplicationPage;
+
+Route::get('/login', LoginForm::class)->name('login');
+Route::get('/forgot-password', ForgotPasswordForm::class)->name('forgot-password');
+Route::get('/portal', PortalPage::class)->name('portal');
+Route::get('/application', ApplicationPage::class)->name('application');
