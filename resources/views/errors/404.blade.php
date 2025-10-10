@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta content='width=device-width, initial-scale=1.0' name='viewport'>
     <meta content="IE=edge" http-equiv="X-UA-Compatible">
-    <title> 404 Not Found &mdash; {{ config("app.name") }} </title>
+    <title> Halaman Tidak Ditemukan &mdash; {{ config("app.name") }} </title>
 
     <link href="{{ asset("images/brand-logos/favicon.ico") }}" rel="icon" type="image/x-icon">
     <link href="{{ asset("libs/bootstrap/css/bootstrap.min.css") }}" id="style" rel="stylesheet">

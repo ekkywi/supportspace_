@@ -1,7 +1,7 @@
 @extends("layouts.portal")
 
 @section("title")
-    SupportSpace &mdash; Aplikasi
+    SupportSpace &mdash; {{ config("app.name") }}
 @endsection
 
 @section("styles")
@@ -57,8 +57,8 @@
                             <div class="mb-3">
                                 <i class="bi bi-globe fs-1 text-primary"></i>
                             </div>
-                            <h5 class="card-title">IP Management</h5>
-                            <p class="card-text text-muted">Sistem manajemen IP yang efisien dan mudah.</p>
+                            <h5 class="card-title">Pengelolaan Jaringan</h5>
+                            <p class="card-text text-muted">Sistem pengelolaan jaringan yang efisien dan mudah.</p>
                             <a class="btn btn-primary" href="#">Buka Aplikasi <i class="bi bi-arrow-right ms-1"></i></a>
                         </div>
                     </div>
@@ -72,8 +72,8 @@
                             <div class="mb-3">
                                 <i class="bi bi-pc-display fs-1 text-success"></i>
                             </div>
-                            <h5 class="card-title">Asset Management</h5>
-                            <p class="card-text text-muted">Sistem manajemen aset yang efisien dan mudah.</p>
+                            <h5 class="card-title">Pengelolaan Aset</h5>
+                            <p class="card-text text-muted">Sistem pengelolaan aset yang efisien dan mudah.</p>
                             <a class="btn btn-primary" href="#">Buka Aplikasi <i class="bi bi-arrow-right ms-1"></i></a>
                         </div>
                     </div>
@@ -87,7 +87,7 @@
                             <div class="mb-3">
                                 <i class="bi bi-bar-chart-line fs-1 text-warning"></i>
                             </div>
-                            <h5 class="card-title">Analytics</h5>
+                            <h5 class="card-title">Analisis Data</h5>
                             <p class="card-text text-muted">Platform analisis data untuk memantau kinerja.</p>
                             <a class="btn btn-primary" href="#">Buka Aplikasi <i class="bi bi-arrow-right ms-1"></i></a>
                         </div>
@@ -102,7 +102,7 @@
                             <div class="mb-3">
                                 <i class="bi bi-file-earmark-text fs-1 text-info"></i>
                             </div>
-                            <h5 class="card-title">Documentation</h5>
+                            <h5 class="card-title">Dokumentasi</h5>
                             <p class="card-text text-muted">Dokumentasi lengkap untuk pengguna.</p>
                             <a class="btn btn-primary" href="#">Buka Aplikasi <i class="bi bi-arrow-right ms-1"></i></a>
                         </div>
@@ -117,8 +117,8 @@
                             <div class="mb-3">
                                 <i class="bi bi-people fs-1 text-danger"></i>
                             </div>
-                            <h5 class="card-title">User Management</h5>
-                            <p class="card-text text-muted">Sistem manajemen pengguna yang efisien dan mudah.</p>
+                            <h5 class="card-title">Pengelolaan Pengguna</h5>
+                            <p class="card-text text-muted">Sistem pengelolaan pengguna yang efisien dan mudah.</p>
                             <a class="btn btn-primary" href="#">Buka Aplikasi <i class="bi bi-arrow-right ms-1"></i></a>
                         </div>
                     </div>
@@ -132,7 +132,7 @@
                             <div class="mb-3">
                                 <i class="bi bi-shield-lock fs-1 text-secondary"></i>
                             </div>
-                            <h5 class="card-title">Security</h5>
+                            <h5 class="card-title">Keamanan</h5>
                             <p class="card-text text-muted">Alat keamanan untuk melindungi data Anda.</p>
                             <a class="btn btn-primary" href="#">Buka Aplikasi <i class="bi bi-arrow-right ms-1"></i></a>
                         </div>
@@ -147,7 +147,7 @@
                             <div class="mb-3">
                                 <i class="bi bi-chat-dots fs-1 text-dark"></i>
                             </div>
-                            <h5 class="card-title">Customer Support</h5>
+                            <h5 class="card-title">Dukungan Pelanggan</h5>
                             <p class="card-text text-muted">Sistem dukungan pelanggan yang responsif dan efisien.</p>
                             <a class="btn btn-primary" href="#">Buka Aplikasi <i class="bi bi-arrow-right ms-1"></i></a>
                         </div>
@@ -162,7 +162,7 @@
                             <div class="mb-3">
                                 <i class="bi bi-cloud-upload fs-1 text-primary"></i>
                             </div>
-                            <h5 class="card-title">Cloud Storage</h5>
+                            <h5 class="card-title">Penyimpanan Awan</h5>
                             <p class="card-text text-muted">Penyimpanan awan yang aman dan andal.</p>
                             <a class="btn btn-primary" href="#">Buka Aplikasi <i class="bi bi-arrow-right ms-1"></i></a>
                         </div>
@@ -177,7 +177,7 @@
                             <div class="mb-3">
                                 <i class="bi bi-gear fs-1 text-success"></i>
                             </div>
-                            <h5 class="card-title">Settings</h5>
+                            <h5 class="card-title">Pengaturan Aplikasi</h5>
                             <p class="card-text text-muted">Sesuaikan preferensi dan pengaturan Anda.</p>
                             <a class="btn btn-primary" href="#">Buka Aplikasi <i class="bi bi-arrow-right ms-1"></i></a>
                         </div>
@@ -187,4 +187,9 @@
 
         </div>
     </div>
+
+    <div class="scrollToTop">
+        <span class="arrow"><i class="ri-arrow-up-s-fill fs-20"></i></span>
+    </div>
+    <div id="responsive-overlay"></div>
 @endsection

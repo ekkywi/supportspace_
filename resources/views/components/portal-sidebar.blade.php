@@ -38,7 +38,7 @@
             <ul class="main-menu">
                 <li class="slide__category"><span class="category-name">Pengaturan</span></li>
                 <li class="slide">
-                    <a class="side-menu__item {{ request()->routeIs("profile") ? "active" : "" }}" href="">
+                    <a class="side-menu__item {{ request()->routeIs("my-profile") ? "active" : "" }}" href="{{ route("my-profile") }}">
                         <i class="bx bx-user side-menu__icon"></i>
                         <span class="side-menu__label">Profil Saya</span>
                     </a>
