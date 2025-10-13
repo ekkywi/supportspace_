@@ -4,7 +4,7 @@
         <a class="header-logo" href="{{ route("portal") }}">
             <img alt="logo" class="desktop-logo" src="{{ asset("images/brand-logos/logo.png") }}">
             <img alt="logo" class="toggle-logo" src="{{ asset("images/brand-logos/icon.png") }}">
-            <img alt="logo" class="desktop-dark" src="{{ asset("images/brand-logos/logo-portal-dark.png") }}">
+            <img alt="logo" class="desktop-dark" src="{{ asset("images/brand-logos/logo-setting-dark.png") }}">
             <img alt="logo" class="toggle-dark" src="{{ asset("images/brand-logos/icon-portal-dark.png") }}">
         </a>
     </div>
@@ -24,29 +24,49 @@
                         <span class="side-menu__label">Portal</span>
                     </a>
                 </li>
+                <li class="slide">
+                    <a class="side-menu__item {{ request()->routeIs("settings.dashboard") ? "active" : "" }}" href="{{ route("settings.dashboard") }}">
+                        <i class="bx bx-tachometer side-menu__icon"></i>
+                        <span class="side-menu__label">Dashboard</span>
+                    </a>
+                </li>
             </ul>
             <ul class="main-menu">
                 <li class="slide__category"><span class="category-name">Menu Aplikasi</span></li>
                 <li class="slide">
-                    <a class="side-menu__item {{ request()->routeIs("application") ? "active" : "" }}" href="{{ route("application") }}">
-                        <i class="bx bx-unite side-menu__icon"></i>
-                        <span class="side-menu__label">Aplikasi</span>
-                    </a>
-                </li>
-            </ul>
-
-            <ul class="main-menu">
-                <li class="slide__category"><span class="category-name">Menu Personal</span></li>
-                <li class="slide">
-                    <a class="side-menu__item {{ request()->routeIs("my-profile") ? "active" : "" }}" href="{{ route("my-profile") }}">
+                    <a class="side-menu__item" href="#">
                         <i class="bx bx-user side-menu__icon"></i>
-                        <span class="side-menu__label">Profil Saya</span>
+                        <span class="side-menu__label">Pengguna</span>
                     </a>
                 </li>
                 <li class="slide">
-                    <a class="side-menu__item {{ request()->routeIs("account.settings") ? "active" : "" }}" href="">
-                        <i class="bx bx-cog side-menu__icon"></i>
-                        <span class="side-menu__label">Pengaturan Akun</span>
+                    <a class="side-menu__item" href="#">
+                        <i class="bx bx-shape-square side-menu__icon"></i>
+                        <span class="side-menu__label">Departemen</span>
+                    </a>
+                </li>
+                <li class="slide">
+                    <a class="side-menu__item" href="#">
+                        <i class="bx bx-pyramid side-menu__icon"></i>
+                        <span class="side-menu__label">Divisi</span>
+                    </a>
+                </li>
+                <li class="slide">
+                    <a class="side-menu__item" href="#">
+                        <i class="bx bx-briefcase side-menu__icon"></i>
+                        <span class="side-menu__label">Jabatan</span>
+                    </a>
+                </li>
+                <li class="slide">
+                    <a class="side-menu__item" href="#">
+                        <i class="bx bx-user-pin side-menu__icon"></i>
+                        <span class="side-menu__label">Peran</span>
+                    </a>
+                </li>
+                <li class="slide">
+                    <a class="side-menu__item" href="#">
+                        <i class="bx bx-universal-access side-menu__icon"></i>
+                        <span class="side-menu__label">Hak Akses</span>
                     </a>
                 </li>
             </ul>

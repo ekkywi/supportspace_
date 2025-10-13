@@ -1,7 +1,7 @@
-@extends("layouts.portal")
+@extends("layouts.setting")
 
 @section("title")
-    Portal &mdash; {{ config("app.name") }}
+    Dashboard &mdash; {{ config("app.name") }}
 @endsection
 
 @section("styles")

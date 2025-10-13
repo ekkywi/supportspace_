@@ -57,27 +57,35 @@
                                     <span class="me-3"><i class="ri-building-line me-1 align-middle"></i>Georgia</span>
                                     <span><i class="ri-map-pin-line me-1 align-middle"></i>Washington D.C</span>
                                 </p>
+                                <p class="fs-12 fw-semibold text-fixed-white op-7 mb-2 mt-4">Penggunaan Aset :</p>
                                 <div class="d-flex mb-0">
                                     <div class="me-4">
-                                        <p class="fw-bold fs-20 text-fixed-white text-shadow mb-0">113</p>
-                                        <p class="mb-0 fs-11 op-5 text-fixed-white">Projects</p>
+                                        <p class="fw-bold fs-20 text-fixed-white text-shadow mb-0">5</p>
+                                        <p class="mb-0 fs-11 op-5 text-fixed-white">Digunakan</p>
                                     </div>
                                     <div class="me-4">
-                                        <p class="fw-bold fs-20 text-fixed-white text-shadow mb-0">12.2k</p>
-                                        <p class="mb-0 fs-11 op-5 text-fixed-white">Followers</p>
+                                        <p class="fw-bold fs-20 text-fixed-white text-shadow mb-0">0</p>
+                                        <p class="mb-0 fs-11 op-5 text-fixed-white">Perbaikan</p>
+                                    </div>
+                                </div>
+                                <p class="fs-12 fw-semibold text-fixed-white op-7 mb-2 mt-4">Penugasan Proyek :</p>
+                                <div class="d-flex mb-0">
+                                    <div class="me-4">
+                                        <p class="fw-bold fs-20 text-fixed-white text-shadow mb-0">97</p>
+                                        <p class="mb-0 fs-11 op-5 text-fixed-white">Diselesaikan</p>
                                     </div>
                                     <div class="me-4">
-                                        <p class="fw-bold fs-20 text-fixed-white text-shadow mb-0">128</p>
-                                        <p class="mb-0 fs-11 op-5 text-fixed-white">Following</p>
+                                        <p class="fw-bold fs-20 text-fixed-white text-shadow mb-0">97%</p>
+                                        <p class="mb-0 fs-11 op-5 text-fixed-white">Capaian</p>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="p-4 border-bottom border-block-end-dashed">
                             <div class="mb-4">
-                                <p class="fs-15 mb-2 fw-semibold">Professional Bio :</p>
+                                <p class="fs-15 mb-2 fw-semibold">Informasi Umum :</p>
                                 <p class="fs-12 text-muted op-7 mb-0">
-                                    I am <b class="text-default">Sonya Taylor,</b> here by conclude that,i am the founder and managing director of the prestigeous company name laugh at all and acts as the cheif executieve officer of the company.
+                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius officia velit tempora eligendi, nemo provident ratione quibusdam, exercitationem officiis, explicabo saepe. Itaque, sunt asperiores veniam dignissimos voluptates similique temporibus. Mollitia.
                                 </p>
                             </div>
                             <div class="mb-0">
@@ -89,6 +97,9 @@
                                     <p class="mb-0">
                                         <a class="text-primary" href="javascript:void(0)"><u>https://themeforest.net/user/spruko/portfolio</u></a>
                                     </p>
+                                    <button class="btn btn-sm btn-icon btn-primary-light btn-wave waves-effect waves-light">
+                                        <i class="ri-gitea fw-semibold"></i>
+                                    </button>
                                 </div>
                             </div>
                         </div>

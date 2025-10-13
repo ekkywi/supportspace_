@@ -35,7 +35,7 @@
     <div class="container-fluid">
 
         <div class="card mt-4 border-0 mb-4 overflow-hidden header-gradient shadow rounded-4 animate-fade-in-down">
-            <div class="card-body p-1 p-md-4 text-white position-relative">
+            <div class="card-body p-2 p-md-3 text-white position-relative">
                 <div class="row align-items-center">
                     <div class="col-md-8">
                         <h1 class="page-title fw-bold fs-24 mb-2 text-white">Daftar Aplikasi</h1>
@@ -55,11 +55,11 @@
                     <div class="card text-center shadow-sm card-hover rounded-4">
                         <div class="card-body">
                             <div class="mb-3">
-                                <i class="bi bi-globe fs-1 text-primary"></i>
+                                <i class="bi bi-gear fs-1 text-danger"></i>
                             </div>
-                            <h5 class="card-title">Pengelolaan Jaringan</h5>
-                            <p class="card-text text-muted">Sistem pengelolaan jaringan yang efisien dan mudah.</p>
-                            <a class="btn btn-primary" href="#">Buka Aplikasi <i class="bi bi-arrow-right ms-1"></i></a>
+                            <h5 class="card-title">Pengaturan Aplikasi</h5>
+                            <p class="card-text text-muted">Sistem pengaturan aplikasi.</p>
+                            <a class="btn btn-primary" href="{{ route("settings.dashboard") }}">Buka Aplikasi <i class="bi bi-arrow-right ms-1"></i></a>
                         </div>
                     </div>
                 </div>
@@ -70,115 +70,10 @@
                     <div class="card text-center shadow-sm card-hover rounded-4">
                         <div class="card-body">
                             <div class="mb-3">
-                                <i class="bi bi-pc-display fs-1 text-success"></i>
+                                <i class="bi bi-pc-display fs-1 text-info"></i>
                             </div>
                             <h5 class="card-title">Pengelolaan Aset</h5>
-                            <p class="card-text text-muted">Sistem pengelolaan aset yang efisien dan mudah.</p>
-                            <a class="btn btn-primary" href="#">Buka Aplikasi <i class="bi bi-arrow-right ms-1"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-xl-3 col-lg-4 col-md-6 col-12 mb-4">
-                <div class="animate-fade-in-up" style="animation-delay: 0.3s;">
-                    <div class="card text-center shadow-sm card-hover rounded-4">
-                        <div class="card-body">
-                            <div class="mb-3">
-                                <i class="bi bi-bar-chart-line fs-1 text-warning"></i>
-                            </div>
-                            <h5 class="card-title">Analisis Data</h5>
-                            <p class="card-text text-muted">Platform analisis data untuk memantau kinerja.</p>
-                            <a class="btn btn-primary" href="#">Buka Aplikasi <i class="bi bi-arrow-right ms-1"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-xl-3 col-lg-4 col-md-6 col-12 mb-4">
-                <div class="animate-fade-in-up" style="animation-delay: 0.4s;">
-                    <div class="card text-center shadow-sm card-hover rounded-4">
-                        <div class="card-body">
-                            <div class="mb-3">
-                                <i class="bi bi-file-earmark-text fs-1 text-info"></i>
-                            </div>
-                            <h5 class="card-title">Dokumentasi</h5>
-                            <p class="card-text text-muted">Dokumentasi lengkap untuk pengguna.</p>
-                            <a class="btn btn-primary" href="#">Buka Aplikasi <i class="bi bi-arrow-right ms-1"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-xl-3 col-lg-4 col-md-6 col-12 mb-4">
-                <div class="animate-fade-in-up" style="animation-delay: 0.5s;">
-                    <div class="card text-center shadow-sm card-hover rounded-4">
-                        <div class="card-body">
-                            <div class="mb-3">
-                                <i class="bi bi-people fs-1 text-danger"></i>
-                            </div>
-                            <h5 class="card-title">Pengelolaan Pengguna</h5>
-                            <p class="card-text text-muted">Sistem pengelolaan pengguna yang efisien dan mudah.</p>
-                            <a class="btn btn-primary" href="#">Buka Aplikasi <i class="bi bi-arrow-right ms-1"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-xl-3 col-lg-4 col-md-6 col-12 mb-4">
-                <div class="animate-fade-in-up" style="animation-delay: 0.6s;">
-                    <div class="card text-center shadow-sm card-hover rounded-4">
-                        <div class="card-body">
-                            <div class="mb-3">
-                                <i class="bi bi-shield-lock fs-1 text-secondary"></i>
-                            </div>
-                            <h5 class="card-title">Keamanan</h5>
-                            <p class="card-text text-muted">Alat keamanan untuk melindungi data Anda.</p>
-                            <a class="btn btn-primary" href="#">Buka Aplikasi <i class="bi bi-arrow-right ms-1"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-xl-3 col-lg-4 col-md-6 col-12 mb-4">
-                <div class="animate-fade-in-up" style="animation-delay: 0.7s;">
-                    <div class="card text-center shadow-sm card-hover rounded-4">
-                        <div class="card-body">
-                            <div class="mb-3">
-                                <i class="bi bi-chat-dots fs-1 text-dark"></i>
-                            </div>
-                            <h5 class="card-title">Dukungan Pelanggan</h5>
-                            <p class="card-text text-muted">Sistem dukungan pelanggan yang responsif dan efisien.</p>
-                            <a class="btn btn-primary" href="#">Buka Aplikasi <i class="bi bi-arrow-right ms-1"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-xl-3 col-lg-4 col-md-6 col-12 mb-4">
-                <div class="animate-fade-in-up" style="animation-delay: 0.8s;">
-                    <div class="card text-center shadow-sm card-hover rounded-4">
-                        <div class="card-body">
-                            <div class="mb-3">
-                                <i class="bi bi-cloud-upload fs-1 text-primary"></i>
-                            </div>
-                            <h5 class="card-title">Penyimpanan Awan</h5>
-                            <p class="card-text text-muted">Penyimpanan awan yang aman dan andal.</p>
-                            <a class="btn btn-primary" href="#">Buka Aplikasi <i class="bi bi-arrow-right ms-1"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-xl-3 col-lg-4 col-md-6 col-12 mb-4">
-                <div class="animate-fade-in-up" style="animation-delay: 0.9s;">
-                    <div class="card text-center shadow-sm card-hover rounded-4">
-                        <div class="card-body">
-                            <div class="mb-3">
-                                <i class="bi bi-gear fs-1 text-success"></i>
-                            </div>
-                            <h5 class="card-title">Pengaturan Aplikasi</h5>
-                            <p class="card-text text-muted">Sesuaikan preferensi dan pengaturan Anda.</p>
+                            <p class="card-text text-muted">Sistem pengelolaan aset perusahaan.</p>
                             <a class="btn btn-primary" href="#">Buka Aplikasi <i class="bi bi-arrow-right ms-1"></i></a>
                         </div>
                     </div>

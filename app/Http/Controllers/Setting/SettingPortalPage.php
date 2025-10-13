@@ -1,0 +1,14 @@
+<?php
+
+namespace App\Http\Controllers\Setting;
+
+use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+
+class SettingPortalPage extends Controller
+{
+    public function __invoke(Request $request)
+    {
+        return view("contents.setting-dashboard");
+    }
+}
