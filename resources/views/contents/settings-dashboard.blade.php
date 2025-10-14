@@ -1,4 +1,4 @@
-@extends("layouts.setting")
+@extends("layouts.settings")
 
 @section("title")
     Dashboard &mdash; {{ config("app.name") }}

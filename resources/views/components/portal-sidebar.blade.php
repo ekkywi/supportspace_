@@ -28,7 +28,7 @@
             <ul class="main-menu">
                 <li class="slide__category"><span class="category-name">Menu Aplikasi</span></li>
                 <li class="slide">
-                    <a class="side-menu__item {{ request()->routeIs("application") ? "active" : "" }}" href="{{ route("application") }}">
+                    <a class="side-menu__item {{ request()->routeIs("modules") ? "active" : "" }}" href="{{ route("modules") }}">
                         <i class="bx bx-unite side-menu__icon"></i>
                         <span class="side-menu__label">Aplikasi</span>
                     </a>

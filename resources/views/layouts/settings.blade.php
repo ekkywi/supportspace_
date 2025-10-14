@@ -16,7 +16,7 @@
 
     <div class="page">
         @include("components.header")
-        @include("components.setting-sidebar")
+        @include("components.settings-sidebar")
 
         <div class="main-content app-content">
             @yield("content")

@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Http\Controllers\Setting;
+namespace App\Http\Controllers\Module;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class SettingPortalPage extends Controller
+class SettingDashboardPage extends Controller
 {
     public function __invoke(Request $request)
     {
-        return view("contents.setting-dashboard");
+        return view('contents.settings-dashboard');
     }
 }

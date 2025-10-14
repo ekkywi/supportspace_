@@ -5,10 +5,10 @@ namespace App\Http\Controllers\Portal;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class ApplicationPage extends Controller
+class ModulePage extends Controller
 {
     public function __invoke(Request $request)
     {
-        return view('contents.application');
+        return view('contents.modules');
     }
 }

@@ -32,7 +32,7 @@
                 </li>
             </ul>
             <ul class="main-menu">
-                <li class="slide__category"><span class="category-name">Menu Aplikasi</span></li>
+                <li class="slide__category"><span class="category-name">Pengguna dan Hak Akses</span></li>
                 <li class="slide">
                     <a class="side-menu__item" href="#">
                         <i class="bx bx-user side-menu__icon"></i>
@@ -40,15 +40,15 @@
                     </a>
                 </li>
                 <li class="slide">
-                    <a class="side-menu__item" href="#">
+                    <a class="side-menu__item {{ request()->routeIs("settings.departments.index") ? "active" : "" }}" href="{{ route("settings.departments.index") }}">
                         <i class="bx bx-shape-square side-menu__icon"></i>
                         <span class="side-menu__label">Departemen</span>
                     </a>
                 </li>
                 <li class="slide">
-                    <a class="side-menu__item" href="#">
+                    <a class="side-menu__item {{ request()->routeIs("settings.sections.index") ? "active" : "" }}" href="{{ route("settings.sections.index") }}">
                         <i class="bx bx-pyramid side-menu__icon"></i>
-                        <span class="side-menu__label">Divisi</span>
+                        <span class="side-menu__label">Bagian</span>
                     </a>
                 </li>
                 <li class="slide">

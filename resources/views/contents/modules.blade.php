@@ -55,7 +55,7 @@
                     <div class="card text-center shadow-sm card-hover rounded-4">
                         <div class="card-body">
                             <div class="mb-3">
-                                <i class="bi bi-gear fs-1 text-danger"></i>
+                                <i class="bi bi-gear fs-1 text-info"></i>
                             </div>
                             <h5 class="card-title">Pengaturan Aplikasi</h5>
                             <p class="card-text text-muted">Sistem pengaturan aplikasi.</p>
@@ -70,7 +70,7 @@
                     <div class="card text-center shadow-sm card-hover rounded-4">
                         <div class="card-body">
                             <div class="mb-3">
-                                <i class="bi bi-pc-display fs-1 text-info"></i>
+                                <i class="bi bi-pc-display fs-1 text-danger"></i>
                             </div>
                             <h5 class="card-title">Pengelolaan Aset</h5>
                             <p class="card-text text-muted">Sistem pengelolaan aset perusahaan.</p>
