@@ -52,19 +52,19 @@
                     </a>
                 </li>
                 <li class="slide">
-                    <a class="side-menu__item" href="#">
+                    <a class="side-menu__item {{ request()->routeIs("settings.positions.index") ? "active" : "" }}" href="{{ route("settings.positions.index") }}">
                         <i class="bx bx-briefcase side-menu__icon"></i>
                         <span class="side-menu__label">Jabatan</span>
                     </a>
                 </li>
                 <li class="slide">
-                    <a class="side-menu__item" href="#">
+                    <a class="side-menu__item {{ request()->routeIs("settings.roles.index") ? "active" : "" }}" href="{{ route("settings.roles.index") }}">
                         <i class="bx bx-user-pin side-menu__icon"></i>
                         <span class="side-menu__label">Peran</span>
                     </a>
                 </li>
                 <li class="slide">
-                    <a class="side-menu__item" href="#">
+                    <a class="side-menu__item {{ request()->routeIs("settings.permissions.index") ? "active" : "" }}" href="{{ route("settings.permissions.index") }}">
                         <i class="bx bx-universal-access side-menu__icon"></i>
                         <span class="side-menu__label">Hak Akses</span>
                     </a>
