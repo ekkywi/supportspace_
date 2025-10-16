@@ -29,68 +29,11 @@
     <script src="{{ asset("js/custom-switcher.min.js") }}"></script>
     <script src="{{ asset("libs/choices.js/public/assets/scripts/choices.min.js") }}"></script>
     <script src="{{ asset("js/main.js") }}"></script>
+    <script src="{{ asset("libs/sweetalert2/sweetalert2.all.min.js") }}"></script>
+    <script src="{{ asset("js/notification.js") }}"></script>
 @endsection
 
 @section("content")
-    @php
-        $dummyDepartments = [
-            [
-                "id" => 1,
-                "name" => "Dukungan Pelanggan",
-                "code" => "CUST-SUP",
-                "users_count" => 12,
-            ],
-            [
-                "id" => 2,
-                "name" => "Teknologi Informasi",
-                "code" => "IT",
-                "users_count" => 8,
-            ],
-            [
-                "id" => 3,
-                "name" => "Sumber Daya Manusia",
-                "code" => "HR",
-                "users_count" => 5,
-            ],
-            [
-                "id" => 4,
-                "name" => "Pemasaran",
-                "code" => "MKT",
-                "users_count" => 7,
-            ],
-            [
-                "id" => 5,
-                "name" => "Penjualan",
-                "code" => "SALES",
-                "users_count" => 10,
-            ],
-            [
-                "id" => 6,
-                "name" => "Keuangan",
-                "code" => "FIN",
-                "users_count" => 4,
-            ],
-            [
-                "id" => 7,
-                "name" => "Operasi",
-                "code" => "OPS",
-                "users_count" => 6,
-            ],
-            [
-                "id" => 8,
-                "name" => "Pengembangan Produk",
-                "code" => "PD",
-                "users_count" => 9,
-            ],
-            [
-                "id" => 9,
-                "name" => "Logistik",
-                "code" => "LOG",
-                "users_count" => 3,
-            ],
-        ];
-    @endphp
-
     <div class="container-fluid">
 
         <div class="d-md-flex d-block align-items-center justify-content-between my-4 page-header-breadcrumb">
@@ -129,20 +72,24 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @forelse ($dummyDepartments as $department)
+                                    @forelse ($departments as $department)
                                         <tr>
                                             <td class="text-center">{{ $loop->iteration }}</td>
-                                            <td>{{ $department["name"] }}</td>
-                                            <td class="text-center">{{ $department["code"] }}</td>
-                                            <td class="text-center">{{ $department["users_count"] }}</td>
+                                            <td>{{ $department->name }}</td>
+                                            <td class="text-center">{{ $department->code }}</td>
+                                            <td class="text-center"></td>
                                             <td class="text-center">
                                                 <div class="btn-group">
                                                     <button class="btn btn-sm btn-outline-secondary me-2" data-bs-target="#editDepartmentModal{{ $department["id"] }}" data-bs-toggle="modal">
                                                         <i class="bi bi-pencil-fill me-1"></i> Edit
                                                     </button>
-                                                    <button class="btn btn-sm btn-outline-danger" onclick="alert('Ini adalah aksi hapus dummy.');" type="button">
-                                                        <i class="bi bi-trash-fill me-1"></i> Hapus
-                                                    </button>
+                                                    <form action="{{ route("settings.departments.destroy", $department->id) }}" id="delete-form-{{ $department->id }}" method="POST" style="display: inline;">
+                                                        @csrf
+                                                        @method("DELETE")
+                                                        <button class="btn btn-sm btn-outline-danger" onclick="confirmDelete({{ $department->id }})" type="button">
+                                                            <i class="bi bi-trash-fill me-1"></i> Hapus
+                                                        </button>
+                                                    </form>
                                                 </div>
                                             </td>
                                         </tr>
@@ -182,7 +129,7 @@
                     <h5 class="modal-title" id="addDepartmentModalLabel">Tambah Divisi Baru</h5>
                     <button aria-label="Close" class="btn-close" data-bs-dismiss="modal" type="button"></button>
                 </div>
-                <form action="javascript:void(0);" method="POST">
+                <form action="{{ route("settings.departments.store") }}" method="POST">
                     @csrf
                     <div class="modal-body">
                         <div class="mb-3">
@@ -205,15 +152,15 @@
     </div>
 
     {{-- Modal edit departemen --}}
-    @foreach ($dummyDepartments as $department)
-        <div aria-hidden="true" aria-labelledby="editDepartmentModalLabel{{ $department["id"] }}" class="modal fade" id="editDepartmentModal{{ $department["id"] }}" tabindex="-1">
+    @foreach ($departments as $department)
+        <div aria-hidden="true" aria-labelledby="editDepartmentModalLabel{{ $department->id }}" class="modal fade" id="editDepartmentModal{{ $department->id }}" tabindex="-1">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="editDepartmentModalLabel{{ $department["id"] }}">Edit Divisi</h5>
+                        <h5 class="modal-title" id="editDepartmentModalLabel{{ $department->id }}">Edit Divisi</h5>
                         <button aria-label="Close" class="btn-close" data-bs-dismiss="modal" type="button"></button>
                     </div>
-                    <form action="javascript:void(0);" method="POST">
+                    <form action="{{ route("settings.departments.update", $department->id) }} " method="POST">
                         @csrf
                         @method("PUT")
                         <div class="modal-body">
