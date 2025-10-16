@@ -113,6 +113,9 @@
                                             <td class="text-center">{{ $role["users_count"] }}</td>
                                             <td class="text-center">
                                                 <div class="btn-group">
+                                                    <button class="btn btn-sm btn-outline-info me-2" data-bs-target="#rolePermissionsModal{{ $role["id"] }}" data-bs-toggle="modal">
+                                                        <i class="bi bi-key-fill me-1"></i> Hak Akses
+                                                    </button>
                                                     <button class="btn btn-sm btn-outline-secondary me-2" data-bs-target="#editRoleModal{{ $role["id"] }}" data-bs-toggle="modal">
                                                         <i class="bi bi-pencil-fill me-1"></i> Edit
                                                     </button>

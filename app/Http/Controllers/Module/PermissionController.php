@@ -9,6 +9,6 @@ class PermissionController extends Controller
 {
     public function index()
     {
-        return view('contents.permissions');
+        return view('contents.settings-permissions');
     }
 }

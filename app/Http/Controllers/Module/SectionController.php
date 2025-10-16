@@ -9,6 +9,6 @@ class SectionController extends Controller
 {
     public function index()
     {
-        return view('contents.sections');
+        return view('contents.settings-sections');
     }
 }

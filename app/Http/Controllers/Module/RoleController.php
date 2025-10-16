@@ -9,6 +9,6 @@ class RoleController extends Controller
 {
     public function index()
     {
-        return view('contents.roles');
+        return view('contents.settings-roles');
     }
 }

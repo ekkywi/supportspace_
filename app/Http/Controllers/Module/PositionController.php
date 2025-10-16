@@ -9,6 +9,6 @@ class PositionController extends Controller
 {
     public function index()
     {
-        return view('contents.positions');
+        return view('contents.settings-positions');
     }
 }
