@@ -17,20 +17,40 @@
                 </svg>
             </div>
             <ul class="main-menu">
-
                 <li class="slide__category"><span class="category-name">Menu Utama</span></li>
                 <li class="slide">
                     <a class="side-menu__item {{ request()->routeIs("portal") ? "active" : "" }}" href="{{ route("portal") }}">
                         <i class="bx bx-grid-alt side-menu__icon"></i>
                         <span class="side-menu__label">Portal</span>
                     </a>
-                    <a class="side-menu__item {{ request()->routeIs("application") ? "active" : "" }}" href="{{ route("application") }}">
+                </li>
+            </ul>
+            <ul class="main-menu">
+                <li class="slide__category"><span class="category-name">Menu Aplikasi</span></li>
+                <li class="slide">
+                    <a class="side-menu__item {{ request()->routeIs("modules") ? "active" : "" }}" href="{{ route("modules") }}">
                         <i class="bx bx-unite side-menu__icon"></i>
                         <span class="side-menu__label">Aplikasi</span>
                     </a>
                 </li>
-
             </ul>
+
+            <ul class="main-menu">
+                <li class="slide__category"><span class="category-name">Menu Personal</span></li>
+                <li class="slide">
+                    <a class="side-menu__item {{ request()->routeIs("my-profile") ? "active" : "" }}" href="{{ route("my-profile") }}">
+                        <i class="bx bx-user side-menu__icon"></i>
+                        <span class="side-menu__label">Profil Saya</span>
+                    </a>
+                </li>
+                <li class="slide">
+                    <a class="side-menu__item {{ request()->routeIs("account.settings") ? "active" : "" }}" href="">
+                        <i class="bx bx-cog side-menu__icon"></i>
+                        <span class="side-menu__label">Pengaturan Akun</span>
+                    </a>
+                </li>
+            </ul>
+
             <div class="slide-right" id="slide-right"><svg fill="#7b8191" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
                     <path d="M10.707 17.707 16.414 12l-5.707-5.707-1.414 1.414L13.586 12l-4.293 4.293z"></path>
                 </svg></div>
