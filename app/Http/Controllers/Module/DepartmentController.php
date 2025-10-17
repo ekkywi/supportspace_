@@ -5,15 +5,24 @@ namespace App\Http\Controllers\Module;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreDepartmentRequest;
+use App\Http\Requests\UpdateDepartmentRequest;
 use App\Models\Department;
-use Illuminate\Contracts\Cache\Store;
 
 class DepartmentController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $departments = Department::all();
-        return view('contents.settings-departments', compact('departments'));
+        $query = Department::query()->latest();
+
+        if ($request->has("search")) {
+            $search = $request->input("search");
+            $query->where("name", "like", "%" . $search . "%")
+                ->orWhere("code", "like", "%" . $search . "%");
+        }
+
+        $departments = $query->paginate(10);
+
+        return view("contents.settings-departments", compact("departments"));
     }
 
     public function store(StoreDepartmentRequest $request)
@@ -30,7 +39,7 @@ class DepartmentController extends Controller
         return back()->with('flash', $notification);
     }
 
-    public function update(StoreDepartmentRequest $request, Department $department)
+    public function update(UpdateDepartmentRequest $request, Department $department)
     {
         $validated = $request->validated();
 
@@ -54,5 +63,21 @@ class DepartmentController extends Controller
         ];
 
         return back()->with('flash', $notification);
+    }
+
+    public function search(Request $request)
+    {
+        $search = $request->input("search");
+
+        $query = Department::query();
+
+        if ($search) {
+            $query->where("name", "like", "%{$search}%")
+                ->orWhere("code", "like", "%{$search}%");
+        }
+
+        $departments = $query->latest()->get();
+
+        return response()->json($departments);
     }
 }

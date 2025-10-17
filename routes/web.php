@@ -9,6 +9,7 @@ use App\Http\Controllers\Portal\ModulePage;
 use App\Http\Controllers\Portal\MyProfilePage;
 use App\Http\Controllers\Module\SettingDashboardPage;
 use App\Http\Controllers\Module\DepartmentController;
+use App\Http\Controllers\Module\DepartmentArchiveController;
 use App\Http\Controllers\Module\SectionController;
 use App\Http\Controllers\Module\PositionController;
 use App\Http\Controllers\Module\RoleController;
@@ -21,23 +22,28 @@ Route::get('/portal', PortalPage::class)->name('portal');
 Route::get('/modules', ModulePage::class)->name('modules');
 Route::get('/my-profile', MyProfilePage::class)->name('my-profile');
 
-// Rute untuk Settings -> Dashboard
+// Rute untuk Pengaturan Aplikasi -> Dashboard
 Route::get('/settings', SettingDashboardPage::class)->name('settings.dashboard');
 
-// Rute untuk Settings -> Departments
+// Rute untuk Pengaturan Aplikasi -> Departemen
 Route::get('/settings/departments', [DepartmentController::class, 'index'])->name('settings.departments.index');
 Route::post('/settings/departments', [DepartmentController::class, 'store'])->name('settings.departments.store');
 Route::put('/settings/departments/{department}', [DepartmentController::class, 'update'])->name('settings.departments.update');
 Route::delete('/settings/departments/{department}', [DepartmentController::class, 'destroy'])->name('settings.departments.destroy');
 
-// Rute untuk Settings -> Sections
+// Rute untuk Pengaturan Aplikasi -> Departement -> Arsip
+Route::get('/settings/departments/archive', [DepartmentArchiveController::class, 'index'])->name('settings.departments.archives.index');
+Route::put('departments/{department}/restore', [DepartmentArchiveController::class, 'restore'])->name('settings.departments.archives.restore')->withTrashed();
+Route::delete('departments/{department}/force-delete', [DepartmentArchiveController::class, 'forceDelete'])->name('settings.departments.archives.force.delete')->withTrashed();
+
+// Rute untuk Pengaturan Aplikasi -> Bagian
 Route::get('/settings/sections', [SectionController::class, 'index'])->name('settings.sections.index');
 
-//Rute untuk Settings -> Positions
+//Rute untuk Pengaturan Aplikasi -> Jabatan
 Route::get('/settings/positions', [PositionController::class, 'index'])->name('settings.positions.index');
 
-//Rute untuk Settings -> Roles
+//Rute untuk Pengaturan Aplikasi -> Peran
 Route::get('/settings/roles', [RoleController::class, 'index'])->name('settings.roles.index');
 
-//Rute untuk Settings -> Permissions
+//Rute untuk Pengaturan Aplikasi -> Hak Akses
 Route::get('/settings/permissions', [PermissionController::class, 'index'])->name('settings.permissions.index');

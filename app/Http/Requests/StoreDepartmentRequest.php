@@ -34,11 +34,11 @@ class StoreDepartmentRequest extends FormRequest
             [
                 'name.required' => 'Nama departemen wajib diisi.',
                 'name.string' => 'Nama departemen harus berupa teks.',
-                'name.unique' => 'Nama departemen sudah ada.',
+                'name.unique' => 'Nama departemen sudah ada atau sudah pernah digunakan.',
 
                 'code.required' => 'Kode departemen wajib diisi.',
                 'code.string' => 'Kode departemen harus berupa teks.',
-                'code.unique' => 'Kode departemen sudah ada.',
+                'code.unique' => 'Kode departemen sudah ada ataun sudah pernah digunakan.',
                 'code.max' => 'Kode departemen maksimal 5 karakter.',
             ];
     }

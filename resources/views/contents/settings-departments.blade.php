@@ -50,14 +50,25 @@
                 <button class="btn btn-primary btn-wave" data-bs-target="#addDepartmentModal" data-bs-toggle="modal" type="button">
                     <i class="bi bi-plus-lg me-2"></i>Tambah Departemen Baru
                 </button>
+                <a class="btn btn-info btn-wave" href="{{ route("settings.departments.archives.index") }}">
+                    <i class="bi bi-files me-2"></i>Lihat Arsip
+                </a>
             </div>
         </div>
 
         <div class="row">
             <div class="col-xl-12">
                 <div class="card custom-card">
-                    <div class="card-header">
+                    <div class="card-header d-flex flex-wrap justify-content-between align-items-center">
                         <h5 class="card-title my-auto">Daftar Departemen</h5>
+                        <form action="{{ route("settings.departments.index") }}" method="GET">
+                            <div class="input-group">
+                                <input class="form-control" name="search" placeholder="Pencarian..." type="text" value="{{ request("search") }}">
+                                <button class="btn btn-primary" type="submit">
+                                    <i class="bi bi-search me-2"></i>Cari
+                                </button>
+                            </div>
+                        </form>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
@@ -75,7 +86,7 @@
                                     @forelse ($departments as $department)
                                         <tr>
                                             <td class="text-center">{{ $loop->iteration }}</td>
-                                            <td>{{ $department->name }}</td>
+                                            <td class="text-center">{{ $department->name }}</td>
                                             <td class="text-center">{{ $department->code }}</td>
                                             <td class="text-center"></td>
                                             <td class="text-center">
@@ -86,7 +97,7 @@
                                                     <form action="{{ route("settings.departments.destroy", $department->id) }}" id="delete-form-{{ $department->id }}" method="POST" style="display: inline;">
                                                         @csrf
                                                         @method("DELETE")
-                                                        <button class="btn btn-sm btn-outline-danger" onclick="confirmDelete({{ $department->id }})" type="button">
+                                                        <button class="btn btn-sm btn-outline-danger delete-button" data-id="{{ $department->id }}" type="button">
                                                             <i class="bi bi-trash-fill me-1"></i> Hapus
                                                         </button>
                                                     </form>
@@ -105,15 +116,9 @@
                         </div>
                     </div>
                     <div class="card-footer">
-                        <nav aria-label="Page navigation">
-                            <ul class="pagination justify-content-end mb-0">
-                                <li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
-                                <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                <li class="page-item"><a class="page-link" href="#">Next</a></li>
-                            </ul>
-                        </nav>
+                        <div class="card-footer">
+                            {{ $departments->links() }}
+                        </div>
                     </div>
                 </div>
             </div>
@@ -134,11 +139,11 @@
                     <div class="modal-body">
                         <div class="mb-3">
                             <label class="form-label" for="name">Nama Divisi</label>
-                            <input class="form-control" id="name" name="name" placeholder="Contoh: Marketing" required type="text">
+                            <input class="form-control" id="name" name="name" placeholder="Contoh: Produksi" required type="text">
                         </div>
                         <div class="mb-3">
                             <label class="form-label" for="code">Kode Departemen</label>
-                            <input class="form-control" id="code" name="code" placeholder="Contoh: MKT" required type="text">
+                            <input class="form-control" id="code" name="code" placeholder="Contoh: PROD" required type="text">
                             <div class="form-text">Kode singkat untuk departemen ini (maksimal 5 karakter).</div>
                         </div>
                     </div>
