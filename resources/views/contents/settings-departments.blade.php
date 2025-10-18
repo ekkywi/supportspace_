@@ -78,7 +78,6 @@
                                         <th class="text-center" scope="col" style="width: 5%;">No.</th>
                                         <th class="text-center" scope="col">Nama Divisi</th>
                                         <th class="text-center" scope="col">Kode Departmen</th>
-                                        <th class="text-center" scope="col">Jumlah Anggota</th>
                                         <th class="text-center" scope="col" style="width: 15%;">Aksi</th>
                                     </tr>
                                 </thead>
@@ -88,7 +87,6 @@
                                             <td class="text-center">{{ $loop->iteration }}</td>
                                             <td class="text-center">{{ $department->name }}</td>
                                             <td class="text-center">{{ $department->code }}</td>
-                                            <td class="text-center"></td>
                                             <td class="text-center">
                                                 <div class="btn-group">
                                                     <button class="btn btn-sm btn-outline-secondary me-2" data-bs-target="#editDepartmentModal{{ $department["id"] }}" data-bs-toggle="modal">
@@ -170,12 +168,12 @@
                         @method("PUT")
                         <div class="modal-body">
                             <div class="mb-3">
-                                <label class="form-label" for="name-{{ $department["id"] }}">Nama Divisi</label>
-                                <input class="form-control" id="name-{{ $department["id"] }}" name="name" required type="text" value="{{ $department["name"] }}">
+                                <label class="form-label" for="name-{{ $department->id }}">Nama Divisi</label>
+                                <input class="form-control" id="name-{{ $department->id }}" name="name" required type="text" value="{{ $department->name }}">
                             </div>
                             <div class="mb-3">
-                                <label class="form-label" for="code-{{ $department["id"] }}">Kode Departemen</label>
-                                <input class="form-control" id="code-{{ $department["id"] }}" name="code" required type="text" value="{{ $department["code"] }}">
+                                <label class="form-label" for="code-{{ $department->id }}">Kode Departemen</label>
+                                <input class="form-control" id="code-{{ $department->id }}" name="code" required type="text" value="{{ $department->code }}">
                                 <div class="form-text">Kode singkat untuk departemen ini (maksimal 5 karakter).</div>
                             </div>
                         </div>

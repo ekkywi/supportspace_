@@ -29,68 +29,11 @@
     <script src="{{ asset("js/custom-switcher.min.js") }}"></script>
     <script src="{{ asset("libs/choices.js/public/assets/scripts/choices.min.js") }}"></script>
     <script src="{{ asset("js/main.js") }}"></script>
+    <script src="{{ asset("libs/sweetalert2/sweetalert2.all.min.js") }}"></script>
+    <script src="{{ asset("js/notification.js") }}"></script>
 @endsection
 
 @section("content")
-    @php
-        $dummySections = [
-            [
-                "id" => 1,
-                "name" => "Dukungan Pelanggan",
-                "code" => "CUST-SUP",
-                "users_count" => 12,
-            ],
-            [
-                "id" => 2,
-                "name" => "Teknologi Informasi",
-                "code" => "IT",
-                "users_count" => 8,
-            ],
-            [
-                "id" => 3,
-                "name" => "Sumber Daya Manusia",
-                "code" => "HR",
-                "users_count" => 5,
-            ],
-            [
-                "id" => 4,
-                "name" => "Pemasaran",
-                "code" => "MKT",
-                "users_count" => 7,
-            ],
-            [
-                "id" => 5,
-                "name" => "Penjualan",
-                "code" => "SL",
-                "users_count" => 10,
-            ],
-            [
-                "id" => 6,
-                "name" => "Keuangan",
-                "code" => "FIN",
-                "users_count" => 6,
-            ],
-            [
-                "id" => 7,
-                "name" => "Pengembangan Produk",
-                "code" => "PD",
-                "users_count" => 9,
-            ],
-            [
-                "id" => 8,
-                "name" => "Operasi",
-                "code" => "OPS",
-                "users_count" => 4,
-            ],
-            [
-                "id" => 9,
-                "name" => "Layanan Pelanggan",
-                "code" => "CS",
-                "users_count" => 11,
-            ],
-        ];
-    @endphp
-
     <div class="container-fluid">
 
         <div class="d-md-flex d-block align-items-center justify-content-between my-4 page-header-breadcrumb">
@@ -107,14 +50,25 @@
                 <button class="btn btn-primary btn-wave" data-bs-target="#addSectionModal" data-bs-toggle="modal" type="button">
                     <i class="bi bi-plus-lg me-2"></i>Tambah Bagian Baru
                 </button>
+                <a class="btn btn-info btn-wave" href="{{ route("settings.sections.archives.index") }}">
+                    <i class="bi bi-files me-2"></i>Lihat Arsip
+                </a>
             </div>
         </div>
 
         <div class="row">
             <div class="col-xl-12">
                 <div class="card custom-card">
-                    <div class="card-header">
+                    <div class="card-header d-flex flex-wrap justify-content-between align-items-center">
                         <h5 class="card-title my-auto">Daftar Bagian</h5>
+                        <form action="{{ route("settings.sections.index") }}" method="GET">
+                            <div class="input-group">
+                                <input class="form-control" name="search" placeholder="Pencarian..." type="text" value="{{ request("search") }}">
+                                <button class="btn btn-primary" type="submit">
+                                    <i class="bi bi-search me-2"></i>Cari
+                                </button>
+                            </div>
+                        </form>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
@@ -124,25 +78,27 @@
                                         <th class="text-center" scope="col" style="width: 5%;">No.</th>
                                         <th class="text-center" scope="col">Nama Bagian</th>
                                         <th class="text-center" scope="col">Kode Bagian</th>
-                                        <th class="text-center" scope="col">Jumlah Anggota</th>
                                         <th class="text-center" scope="col" style="width: 15%;">Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @forelse ($dummySections as $section)
+                                    @forelse ($sections as $section)
                                         <tr>
                                             <td class="text-center">{{ $loop->iteration }}</td>
-                                            <td>{{ $section["name"] }}</td>
-                                            <td class="text-center">{{ $section["code"] }}</td>
-                                            <td class="text-center">{{ $section["users_count"] }}</td>
+                                            <td class="text-center">{{ $section->name }}</td>
+                                            <td class="text-center">{{ $section->code }}</td>
                                             <td class="text-center">
                                                 <div class="btn-group">
-                                                    <button class="btn btn-sm btn-outline-secondary me-2" data-bs-target="#editSectionModal{{ $section["id"] }}" data-bs-toggle="modal">
+                                                    <button class="btn btn-sm btn-outline-secondary me-2" data-bs-target="#editSectionModal{{ $section->id }}" data-bs-toggle="modal">
                                                         <i class="bi bi-pencil-fill me-1"></i> Edit
                                                     </button>
-                                                    <button class="btn btn-sm btn-outline-danger" onclick="alert('Ini adalah aksi hapus dummy.');" type="button">
-                                                        <i class="bi bi-trash-fill me-1"></i> Hapus
-                                                    </button>
+                                                    <form action="{{ route("settings.sections.destroy", $section->id) }}" id="delete-form-{{ $section->id }}" method="POST" style="display: inline;">
+                                                        @csrf
+                                                        @method("DELETE")
+                                                        <button class="btn btn-sm btn-outline-danger delete-button" data-id="{{ $section->id }}" type="button">
+                                                            <i class="bi bi-trash-fill me-1"></i> Hapus
+                                                        </button>
+                                                    </form>
                                                 </div>
                                             </td>
                                         </tr>
@@ -158,15 +114,9 @@
                         </div>
                     </div>
                     <div class="card-footer">
-                        <nav aria-label="Page navigation">
-                            <ul class="pagination justify-content-end mb-0">
-                                <li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
-                                <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                <li class="page-item"><a class="page-link" href="#">Next</a></li>
-                            </ul>
-                        </nav>
+                        <div class="card-footer">
+                            {{ $sections->links() }}
+                        </div>
                     </div>
                 </div>
             </div>
@@ -182,7 +132,7 @@
                     <h5 class="modal-title" id="addSectionModalLabel">Tambah Bagian Baru</h5>
                     <button aria-label="Close" class="btn-close" data-bs-dismiss="modal" type="button"></button>
                 </div>
-                <form action="javascript:void(0);" method="POST">
+                <form action="{{ route("settings.sections.store") }}" method="POST">
                     @csrf
                     <div class="modal-body">
                         <div class="mb-3">
@@ -205,25 +155,25 @@
     </div>
 
     {{-- Modal edit bagian --}}
-    @foreach ($dummySections as $section)
-        <div aria-hidden="true" aria-labelledby="editSectionModalLabel{{ $section["id"] }}" class="modal fade" id="editSectionModal{{ $section["id"] }}" tabindex="-1">
+    @foreach ($sections as $section)
+        <div aria-hidden="true" aria-labelledby="editSectionModalLabel{{ $section->id }}" class="modal fade" id="editSectionModal{{ $section->id }}" tabindex="-1">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="editSectionModalLabel{{ $section["id"] }}">Edit Bagian</h5>
+                        <h5 class="modal-title" id="editSectionModalLabel{{ $section->id }}">Edit Bagian</h5>
                         <button aria-label="Close" class="btn-close" data-bs-dismiss="modal" type="button"></button>
                     </div>
-                    <form action="javascript:void(0);" method="POST">
+                    <form action="{{ route("settings.sections.update", $section->id) }}" method="POST">
                         @csrf
                         @method("PUT")
                         <div class="modal-body">
                             <div class="mb-3">
-                                <label class="form-label" for="name-{{ $section["id"] }}">Nama Bagian</label>
-                                <input class="form-control" id="name-{{ $section["id"] }}" name="name" required type="text" value="{{ $section["name"] }}">
+                                <label class="form-label" for="name-{{ $section->id }}">Nama Bagian</label>
+                                <input class="form-control" id="name-{{ $section->id }}" name="name" required type="text" value="{{ $section->name }}">
                             </div>
                             <div class="mb-3">
-                                <label class="form-label" for="code-{{ $section["id"] }}">Kode Bagian</label>
-                                <input class="form-control" id="code-{{ $section["id"] }}" name="code" required type="text" value="{{ $section["code"] }}">
+                                <label class="form-label" for="code-{{ $section->id }}">Kode Bagian</label>
+                                <input class="form-control" id="code-{{ $section->id }}" name="code" required type="text" value="{{ $section->code }}">
                                 <div class="form-text">Kode singkat untuk bagian ini (maksimal 5 karakter).</div>
                             </div>
                         </div>
