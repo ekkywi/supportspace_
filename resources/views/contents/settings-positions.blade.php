@@ -29,38 +29,11 @@
     <script src="{{ asset("js/custom-switcher.min.js") }}"></script>
     <script src="{{ asset("libs/choices.js/public/assets/scripts/choices.min.js") }}"></script>
     <script src="{{ asset("js/main.js") }}"></script>
+    <script src="{{ asset("libs/sweetalert2/sweetalert2.all.min.js") }}"></script>
+    <script src="{{ asset("js/notification.js") }}"></script>
 @endsection
 
 @section("content")
-    @php
-        $dummyPositions = [
-            [
-                "id" => 1,
-                "name" => "Branch Manager",
-                "code" => "BM",
-                "users_count" => 3,
-            ],
-            [
-                "id" => 2,
-                "name" => "Area Manager",
-                "code" => "AM",
-                "users_count" => 5,
-            ],
-            [
-                "id" => 3,
-                "name" => "Sales Executive",
-                "code" => "SE",
-                "users_count" => 12,
-            ],
-            [
-                "id" => 4,
-                "name" => "Customer Service",
-                "code" => "CS",
-                "users_count" => 8,
-            ],
-        ];
-    @endphp
-
     <div class="container-fluid">
 
         <div class="d-md-flex d-block align-items-center justify-content-between my-4 page-header-breadcrumb">
@@ -77,14 +50,25 @@
                 <button class="btn btn-primary btn-wave" data-bs-target="#addPositionModal" data-bs-toggle="modal" type="button">
                     <i class="bi bi-plus-lg me-2"></i>Tambah Jabatan Baru
                 </button>
+                <a class="btn btn-info btn-wave" href="{{ route("settings.positions.archives.index") }}">
+                    <i class="bi bi-files me-2"></i>Lihat Arsip
+                </a>
             </div>
         </div>
 
         <div class="row">
             <div class="col-xl-12">
                 <div class="card custom-card">
-                    <div class="card-header">
+                    <div class="card-header d-flex flex-wrap justify-content-between align-items-center">
                         <h5 class="card-title my-auto">Daftar Jabatan</h5>
+                        <form action="{{ route("settings.positions.index") }}" method="GET">
+                            <div class="input-group">
+                                <input class="form-control" name="search" placeholder="Pencarian..." type="text" value="{{ request("search") }}">
+                                <button class="btn btn-primary" type="submit">
+                                    <i class="bi bi-search me-2"></i>Cari
+                                </button>
+                            </div>
+                        </form>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
@@ -94,25 +78,27 @@
                                         <th class="text-center" scope="col" style="width: 5%;">No.</th>
                                         <th class="text-center" scope="col">Nama Jabatan</th>
                                         <th class="text-center" scope="col">Kode Jabatan</th>
-                                        <th class="text-center" scope="col">Jumlah Anggota</th>
                                         <th class="text-center" scope="col" style="width: 15%;">Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @forelse ($dummyPositions as $position)
+                                    @forelse ($positions as $position)
                                         <tr>
                                             <td class="text-center">{{ $loop->iteration }}</td>
-                                            <td>{{ $position["name"] }}</td>
-                                            <td class="text-center">{{ $position["code"] }}</td>
-                                            <td class="text-center">{{ $position["users_count"] }}</td>
+                                            <td class="text-center">{{ $position->name }}</td>
+                                            <td class="text-center">{{ $position->code }}</td>
                                             <td class="text-center">
                                                 <div class="btn-group">
-                                                    <button class="btn btn-sm btn-outline-secondary me-2" data-bs-target="#editPositionModal{{ $position["id"] }}" data-bs-toggle="modal">
+                                                    <button class="btn btn-sm btn-outline-secondary me-2" data-bs-target="#editPositionModal{{ $position->id }}" data-bs-toggle="modal">
                                                         <i class="bi bi-pencil-fill me-1"></i> Edit
                                                     </button>
-                                                    <button class="btn btn-sm btn-outline-danger" onclick="alert('Ini adalah aksi hapus dummy.');" type="button">
-                                                        <i class="bi bi-trash-fill me-1"></i> Hapus
-                                                    </button>
+                                                    <form action="{{ route("settings.positions.destroy", $position->id) }}" id="delete-form-{{ $position->id }}" method="POST" style="display: inline;">
+                                                        @csrf
+                                                        @method("DELETE")
+                                                        <button class="btn btn-sm btn-outline-danger delete-button" data-id="{{ $position->id }}" type="button">
+                                                            <i class="bi bi-trash-fill me-1"></i> Hapus
+                                                        </button>
+                                                    </form>
                                                 </div>
                                             </td>
                                         </tr>
@@ -128,15 +114,9 @@
                         </div>
                     </div>
                     <div class="card-footer">
-                        <nav aria-label="Page navigation">
-                            <ul class="pagination justify-content-end mb-0">
-                                <li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
-                                <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                <li class="page-item"><a class="page-link" href="#">Next</a></li>
-                            </ul>
-                        </nav>
+                        <div class="card-footer">
+                            {{ $positions->links() }}
+                        </div>
                     </div>
                 </div>
             </div>
@@ -152,16 +132,16 @@
                     <h5 class="modal-title" id="addPositionModalLabel">Tambah Jabatan Baru</h5>
                     <button aria-label="Close" class="btn-close" data-bs-dismiss="modal" type="button"></button>
                 </div>
-                <form action="javascript:void(0);" method="POST">
+                <form action="{{ route("settings.positions.store") }}" method="POST">
                     @csrf
                     <div class="modal-body">
                         <div class="mb-3">
                             <label class="form-label" for="name">Nama Jabatan</label>
-                            <input class="form-control" id="name" name="name" placeholder="Contoh: Manajer Pemasaran" required type="text">
+                            <input class="form-control" id="name" name="name" placeholder="Contoh: Kepala Bagian" required type="text">
                         </div>
                         <div class="mb-3">
                             <label class="form-label" for="code">Kode Jabatan</label>
-                            <input class="form-control" id="code" name="code" placeholder="Contoh: MP" required type="text">
+                            <input class="form-control" id="code" name="code" placeholder="Contoh: KABAG" required type="text">
                             <div class="form-text">Kode singkat untuk jabatan ini (maksimal 5 karakter).</div>
                         </div>
                     </div>
@@ -175,25 +155,25 @@
     </div>
 
     {{-- Modal edit jabatan --}}
-    @foreach ($dummyPositions as $position)
-        <div aria-hidden="true" aria-labelledby="editPositionModalLabel{{ $position["id"] }}" class="modal fade" id="editPositionModal{{ $position["id"] }}" tabindex="-1">
+    @foreach ($positions as $position)
+        <div aria-hidden="true" aria-labelledby="editPositionModalLabel{{ $position->id }}" class="modal fade" id="editPositionModal{{ $position->id }}" tabindex="-1">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="editPositionModalLabel{{ $position["id"] }}">Edit Jabatan</h5>
+                        <h5 class="modal-title" id="editPositionModalLabel{{ $position->id }}">Edit Jabatan</h5>
                         <button aria-label="Close" class="btn-close" data-bs-dismiss="modal" type="button"></button>
                     </div>
-                    <form action="javascript:void(0);" method="POST">
+                    <form action="{{ route("settings.positions.update", $position->id) }}" method="POST">
                         @csrf
                         @method("PUT")
                         <div class="modal-body">
                             <div class="mb-3">
-                                <label class="form-label" for="name-{{ $position["id"] }}">Nama Jabatan</label>
-                                <input class="form-control" id="name-{{ $position["id"] }}" name="name" required type="text" value="{{ $position["name"] }}">
+                                <label class="form-label" for="name-{{ $position->id }}">Nama Jabatan</label>
+                                <input class="form-control" id="name-{{ $position->id }}" name="name" required type="text" value="{{ $position->name }}">
                             </div>
                             <div class="mb-3">
-                                <label class="form-label" for="code-{{ $position["id"] }}">Kode Jabatan</label>
-                                <input class="form-control" id="code-{{ $position["id"] }}" name="code" required type="text" value="{{ $position["code"] }}">
+                                <label class="form-label" for="code-{{ $position->id }}">Kode Jabatan</label>
+                                <input class="form-control" id="code-{{ $position->id }}" name="code" required type="text" value="{{ $position->code }}">
                                 <div class="form-text">Kode singkat untuk jabatan ini (maksimal 5 karakter).</div>
                             </div>
                         </div>

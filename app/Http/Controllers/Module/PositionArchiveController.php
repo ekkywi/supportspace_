@@ -4,47 +4,47 @@ namespace App\Http\Controllers\Module;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Section;
+use App\Models\Position;
 
-class SectionArchiveController extends Controller
+class PositionArchiveController extends Controller
 {
     public function index(Request $request)
     {
         $search = $request->input('search');
 
-        $query = Section::onlyTrashed();
+        $query = Position::onlyTrashed();
 
         if ($search) {
             $query->where(function ($q) use ($search) {
-                $q->where('name', 'like', "%{$search}%")
-                    ->orWhere('code', 'like', "%{$search}%");
+                $q->where("name", "like", "%{$search}%")
+                    ->orWhere("code", "like", "%{$search}");
             });
         }
 
-        $trashedSections = $query->latest('deleted_at')->paginate(10)->appends($request->query());
+        $trashedPositions = $query->latest('deleted_at')->paginate(10)->appends($request->query());
 
-        return view('contents.settings-sections-archives', compact('trashedSections'));
+        return view('contents.settings-positions-archives', compact('trashedPositions'));
     }
 
-    public function restore(Section $section)
+    public function restore(Position $position)
     {
-        $section->restore();
+        $position->restore();
 
         $notification = [
             'type' => 'success',
-            'message' => 'Data bagian berhasil dipulihkan.',
+            'message' => 'Data jabatan berhasil dipulihkan',
         ];
 
         return back()->with('flash', $notification);
     }
 
-    public function forceDelete(Section $section)
+    public function forceDelete(Position $position)
     {
-        $section->forceDelete();
+        $position->forceDelete();
 
         $notification = [
             'type' => 'success',
-            'message' => 'Data bagian dihapus permanen.'
+            'message' => 'Data jabatan dihapus permanen.'
         ];
 
         return back()->with('flash', $notification);
@@ -54,15 +54,15 @@ class SectionArchiveController extends Controller
     {
         $search = $request->input("search");
 
-        $query = Section::query();
+        $query = Position::query();
 
         if ($search) {
             $query->where("name", "like", "%{$search}%")
                 ->orWhere("code", "like", "%{$search}%");
         }
 
-        $sections = $query->latest()->get();
+        $positions = $query->latest()->get();
 
-        return response()->json($sections);
+        return response()->json($positions);
     }
 }

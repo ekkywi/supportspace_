@@ -59,7 +59,7 @@ class SectionController extends Controller
 
         $notifiation = [
             'type' => 'success',
-            'message' => 'Bagian berhasi dihapus.'
+            'message' => 'Bagian berhasil dihapus.'
         ];
 
         return back()->with('flash', $notifiation);
