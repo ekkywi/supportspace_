@@ -1,7 +1,7 @@
 @extends("layouts.settings")
 
 @section("title")
-    Arsip Jabatan &mdash; {{ config("app.name") }}
+    Arsip Peran &mdash; {{ config("app.name") }}
 @endsection
 
 @section("styles")
@@ -38,17 +38,17 @@
 
         <div class="d-md-flex d-block align-items-center justify-content-between my-4 page-header-breadcrumb">
             <div>
-                <h1 class="page-title fw-semibold fs-18 mb-0">Arsip Manajemen Jabatan</h1>
+                <h1 class="page-title fw-semibold fs-18 mb-0">Arsip Manajemen Peran</h1>
                 <nav>
                     <ol class="breadcrumb mb-0 mt-1">
                         <li class="breadcrumb-item"><a href="{{ route("settings.dashboard") }}">Pengaturan Aplikasi</a></li>
-                        <li class="breadcrumb-item"><a href="{{ route("settings.positions.index") }}">Manajemen Jabatan</a></li>
+                        <li class="breadcrumb-item"><a href="{{ route("settings.roles.index") }}">Manajemen Peran</a></li>
                         <li aria-current="page" class="breadcrumb-item active">Arsip</li>
                     </ol>
                 </nav>
             </div>
             <div class="ms-md-1 ms-0 mt-2 mt-md-0">
-                <a class="btn btn-secondary btn-wave" href="{{ route("settings.positions.index") }}">
+                <a class="btn btn-secondary btn-wave" href="{{ route("settings.roles.index") }}">
                     <i class="bi bi-arrow-left me-2"></i>Kembali
                 </a>
             </div>
@@ -58,8 +58,8 @@
             <div class="col-xl-12">
                 <div class="card custom-card">
                     <div class="card-header d-flex flex-wrap justify-content-between align-items-center">
-                        <h5 class="card-title my-auto">Daftar Jabatan</h5>
-                        <form action="{{ route("settings.positions.archives.index") }}" method="GET">
+                        <h5 class="card-title my-auto">Daftar Peran</h5>
+                        <form action="{{ route("settings.roles.archives.index") }}" method="GET">
                             <div class="input-group">
                                 <input class="form-control" name="search" placeholder="Cari di arsip..." type="text" value="{{ request("search") }}">
                                 <button class="btn btn-primary" type="submit">
@@ -74,32 +74,32 @@
                                 <thead>
                                     <tr>
                                         <th class="text-center" scope="col" style="width: 5%;">No.</th>
-                                        <th class="text-center" scope="col">Nama Jabatan</th>
-                                        <th class="text-center" scope="col">Kode Jataban</th>
+                                        <th class="text-center" scope="col">Nama Peran</th>
+                                        <th class="text-center" scope="col">Kode Peran</th>
                                         <th class="text-center" scope="col">Waktu Hapus</th>
                                         <th class="text-center" scope="col" style="width: 15%;">Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @forelse ($trashedPositions as $trashedPosition)
+                                    @forelse ($trashedRoles as $trashedRole)
                                         <tr>
                                             <td class="text-center">{{ $loop->iteration }}</td>
-                                            <td class="text-center">{{ $trashedPosition->name }}</td>
-                                            <td class="text-center">{{ $trashedPosition->code }}</td>
-                                            <td class="text-center">{{ $trashedPosition->deleted_at ? $trashedPosition->deleted_at->format("l, d-m-Y, H:i:s") : "-" }}</td>
+                                            <td class="text-center">{{ $trashedRole->name }}</td>
+                                            <td class="text-center">{{ $trashedRole->code }}</td>
+                                            <td class="text-center">{{ $trashedRole->deleted_at ? $trashedRole->deleted_at->format("l, d-m-Y, H:i:s") : "-" }}</td>
                                             <td class="text-center">
                                                 <div class="btn-group">
-                                                    <form action="{{ route("settings.positions.archives.restore", $trashedPosition) }}" class="d-inline" method="POST">
+                                                    <form action="{{ route("settings.roles.archives.restore", $trashedRole) }}" class="d-inline" method="POST">
                                                         @csrf
                                                         @method("PUT")
                                                         <button class="btn btn-sm btn-outline-success me-2" type="submit">
                                                             <i class="bi bi-arrow-counterclockwise me-1"></i> Pulihkan
                                                         </button>
                                                     </form>
-                                                    <form action="{{ route("settings.positions.archives.force.delete", $trashedPosition) }}" id="force-delete-form-{{ $trashedPosition->id }}" method="POST">
+                                                    <form action="{{ route("settings.roles.archives.force.delete", $trashedRole) }}" id="force-delete-form-{{ $trashedRole->id }}" method="POST">
                                                         @csrf
                                                         @method("DELETE")
-                                                        <button class="btn btn-sm btn-outline-danger" onclick="showConfirmationDialog({ formId: 'force-delete-form-{{ $trashedPosition->id }}' })" type="button">
+                                                        <button class="btn btn-sm btn-outline-danger" onclick="showConfirmationDialog({ formId: 'force-delete-form-{{ $trashedRole->id }}' })" type="button">
                                                             <i class="bi bi-trash3-fill me-1"></i> Hapus Permanen
                                                         </button>
                                                     </form>
@@ -119,7 +119,7 @@
                     </div>
                     <div class="card-footer">
                         <div class="card-footer">
-                            {{ $trashedPositions->links() }}
+                            {{ $trashedRoles->links() }}
                         </div>
                     </div>
                 </div>

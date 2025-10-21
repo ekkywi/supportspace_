@@ -50,7 +50,7 @@
                 <button class="btn btn-primary btn-wave" data-bs-target="#addRoleModal" data-bs-toggle="modal" type="button">
                     <i class="bi bi-plus-lg me-2"></i>Tambah Peran Baru
                 </button>
-                <a class="btn btn-info btn-wave" href="#">
+                <a class="btn btn-info btn-wave" href="{{ route("settings.roles.archives.index") }}">
                     <i class="bi bi-files me-2"></i>Lihat Arsip
                 </a>
             </div>

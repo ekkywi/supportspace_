@@ -70,7 +70,7 @@ function showConfirmationDialog(options) {
         title: options.title || "Apakah Anda yakin?",
         text:
             options.text ||
-            "Tindakan ini akan menghapus data secara permenen dan tidak dapat dipulihkan!",
+            "Tindakan ini akan menghapus data secara permanen dan tidak dapat dipulihkan!",
         icon: options.icon || "warning",
         confirmButtonText: options.confirmButtonText || "Ya, Lanjutkan!",
         formId: options.formId,

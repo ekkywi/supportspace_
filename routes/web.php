@@ -15,6 +15,7 @@ use App\Http\Controllers\Module\PositionController;
 use App\Http\Controllers\Module\RoleController;
 use App\Http\Controllers\Module\PermissionController;
 use App\Http\Controllers\Module\PositionArchiveController;
+use App\Http\Controllers\Module\RoleArchiveController;
 use App\Http\Controllers\Module\SectionArchiveController;
 
 Route::get('/login', LoginForm::class)->name('login');
@@ -59,11 +60,16 @@ Route::get('/settings/positions/archives', [PositionArchiveController::class, 'i
 Route::put('/settings/positions/{position}/restore', [PositionArchiveController::class, 'restore'])->name('settings.positions.archives.restore')->withTrashed();
 Route::delete('/settings/positions/{position}/force-delete', [PositionArchiveController::class, 'forceDelete'])->name('settings.positions.archives.force.delete')->withTrashed();
 
-//Rute untuk Pengaturan Aplikasi -> Peran
+// Rute untuk Pengaturan Aplikasi -> Peran
 Route::get('/settings/roles', [RoleController::class, 'index'])->name('settings.roles.index');
 Route::post('/settings/roles', [RoleController::class, 'store'])->name('settings.roles.store');
 Route::put('/settings/roles/{role}', [RoleController::class, 'update'])->name('settings.roles.update');
 Route::delete('/settings/roles/{role}', [RoleController::class, 'destroy'])->name('settings.roles.destroy');
+
+// Rute untuk Pengaturan Aplikasi -> Peran -> Arsip
+Route::get('/settings/roles/archive', [RoleArchiveController::class, 'index'])->name("settings.roles.archives.index");
+Route::put('/settings/roles/{role}/restore', [RoleArchiveController::class, 'restore'])->name("settings.roles.archives.restore")->withTrashed();
+Route::delete('/settings/roles/{role}/force-delete', [RoleArchiveController::class, 'forceDelete'])->name('settings.roles.archives.force.delete')->withTrashed();
 
 //Rute untuk Pengaturan Aplikasi -> Hak Akses
 Route::get('/settings/permissions', [PermissionController::class, 'index'])->name('settings.permissions.index');

@@ -38,7 +38,7 @@
 
         <div class="d-md-flex d-block align-items-center justify-content-between my-4 page-header-breadcrumb">
             <div>
-                <h1 class="page-title fw-semibold fs-18 mb-0">Manajemen Departemen</h1>
+                <h1 class="page-title fw-semibold fs-18 mb-0">Arsip Manajemen Departemen</h1>
                 <nav>
                     <ol class="breadcrumb mb-0 mt-1">
                         <li class="breadcrumb-item"><a href="{{ route("settings.dashboard") }}">Pengaturan Aplikasi</a></li>
