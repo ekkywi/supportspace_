@@ -76,8 +76,8 @@
                                 <thead>
                                     <tr>
                                         <th class="text-center" scope="col" style="width: 5%;">No.</th>
-                                        <th class="text-center" scope="col">Nama Divisi</th>
-                                        <th class="text-center" scope="col">Kode Departmen</th>
+                                        <th class="text-center" scope="col">Nama Departemen</th>
+                                        <th class="text-center" scope="col">Kode Departemen</th>
                                         <th class="text-center" scope="col" style="width: 15%;">Aksi</th>
                                     </tr>
                                 </thead>
