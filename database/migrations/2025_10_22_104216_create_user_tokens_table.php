@@ -11,12 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('positions', function (Blueprint $table) {
-            $table->uuid('id')->primary();
-            $table->string('name')->unique();
-            $table->string('code')->unique()->maxLength(5);
+        Schema::create('user_tokens', function (Blueprint $table) {
+            $table->uuid('id');
+            $table->foreignUuid('user_id')->constrained('users')->onDelete('cascade');
+            $table->string('token');
+            $table->string('type');
+            $table->boolean('is_used');
+            $table->timestamp('expires_at');
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 
@@ -25,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('positions');
+        Schema::dropIfExists('user_tokens');
     }
 };

@@ -1,18 +1,18 @@
 <?php
 
-namespace App\Http\Controllers\Module;
+namespace App\Http\Controllers\Modules\Settings;
 
 use App\Http\Controllers\Controller;
+use App\Models\Position;
 use Illuminate\Http\Request;
-use App\Http\Requests\StoreDepartmentRequest;
-use App\Http\Requests\UpdateDepartmentRequest;
-use App\Models\Department;
+use App\Http\Requests\StorePositionRequest;
+use App\Http\Requests\UpdatePositionRequest;
 
-class DepartmentController extends Controller
+class PositionController extends Controller
 {
     public function index(Request $request)
     {
-        $query = Department::query()->latest();
+        $query = Position::query()->latest();
 
         if ($request->has("search")) {
             $search = $request->input("search");
@@ -20,46 +20,46 @@ class DepartmentController extends Controller
                 ->orWhere("code", "like", "%" . $search . "%");
         }
 
-        $departments = $query->paginate(10);
+        $positions = $query->paginate(10);
 
-        return view("contents.settings-departments", compact("departments"));
+        return view("contents.settings-positions", compact("positions"));
     }
 
-    public function store(StoreDepartmentRequest $request)
+    public function store(StorePositionRequest $request)
     {
         $validated = $request->validated();
 
-        $department = Department::create($validated);
+        $position = Position::create($validated);
 
         $notification = [
             'type' => 'success',
-            'message' => 'Departemen baru berhasil ditambahkan.'
+            'message' => 'Jabatan baru berhasil ditambahkan.'
         ];
 
         return back()->with('flash', $notification);
     }
 
-    public function update(UpdateDepartmentRequest $request, Department $department)
+    public function update(UpdatePositionRequest $request, Position $position)
     {
         $validated = $request->validated();
 
-        $department->update($validated);
+        $position->update($validated);
 
         $notification = [
             'type' => 'success',
-            'message' => 'Departemen berhasil diperbarui.'
+            'message' => 'Jabatan berhasil diperbarui.'
         ];
 
         return back()->with('flash', $notification);
     }
 
-    public function destroy(Department $department)
+    public function destroy(Position $position)
     {
-        $department->delete();
+        $position->delete();
 
         $notification = [
             'type' => 'success',
-            'message' => 'Departemen berhasil dihapus.'
+            'message' => 'Jabatan berhasil dihapus'
         ];
 
         return back()->with('flash', $notification);
@@ -69,15 +69,15 @@ class DepartmentController extends Controller
     {
         $search = $request->input("search");
 
-        $query = Department::query();
+        $query = Position::query();
 
         if ($search) {
             $query->where("name", "like", "%{$search}%")
                 ->orWhere("code", "like", "%{$search}%");
         }
 
-        $departments = $query->latest()->get();
+        $positions = $query->latest()->get();
 
-        return response()->json($departments);
+        return response()->json($positions);
     }
 }

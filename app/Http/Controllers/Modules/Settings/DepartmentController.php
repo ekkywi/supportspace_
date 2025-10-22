@@ -1,18 +1,18 @@
 <?php
 
-namespace App\Http\Controllers\Module;
+namespace App\Http\Controllers\Modules\Settings;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StoreRoleRequest;
-use App\Http\Requests\UpdateRoleRequest;
 use Illuminate\Http\Request;
-use App\Models\Role;
+use App\Http\Requests\StoreDepartmentRequest;
+use App\Http\Requests\UpdateDepartmentRequest;
+use App\Models\Department;
 
-class RoleController extends Controller
+class DepartmentController extends Controller
 {
     public function index(Request $request)
     {
-        $query = Role::query()->latest();
+        $query = Department::query()->latest();
 
         if ($request->has("search")) {
             $search = $request->input("search");
@@ -20,46 +20,46 @@ class RoleController extends Controller
                 ->orWhere("code", "like", "%" . $search . "%");
         }
 
-        $roles = $query->paginate(10);
+        $departments = $query->paginate(10);
 
-        return view("contents.settings-roles", compact("roles"));
+        return view("contents.settings-departments", compact("departments"));
     }
 
-    public function store(StoreRoleRequest $request)
+    public function store(StoreDepartmentRequest $request)
     {
         $validated = $request->validated();
 
-        $role = Role::create($validated);
+        $department = Department::create($validated);
 
         $notification = [
             'type' => 'success',
-            'message' => 'Peran baru berhasil ditambahkan.'
+            'message' => 'Departemen baru berhasil ditambahkan.'
         ];
 
         return back()->with('flash', $notification);
     }
 
-    public function update(UpdateRoleRequest $request, Role $role)
+    public function update(UpdateDepartmentRequest $request, Department $department)
     {
         $validated = $request->validated();
 
-        $role->update($validated);
+        $department->update($validated);
 
         $notification = [
             'type' => 'success',
-            'message' => 'Peran berhasil diperbarui.'
+            'message' => 'Departemen berhasil diperbarui.'
         ];
 
         return back()->with('flash', $notification);
     }
 
-    public function destroy(Role $role)
+    public function destroy(Department $department)
     {
-        $role->delete();
+        $department->delete();
 
         $notification = [
             'type' => 'success',
-            'message' => 'Peran berhasil dihapus'
+            'message' => 'Departemen berhasil dihapus.'
         ];
 
         return back()->with('flash', $notification);
@@ -69,15 +69,15 @@ class RoleController extends Controller
     {
         $search = $request->input("search");
 
-        $query = Role::query();
+        $query = Department::query();
 
         if ($search) {
             $query->where("name", "like", "%{$search}%")
                 ->orWhere("code", "like", "%{$search}%");
         }
 
-        $roles = $query->latest()->get();
+        $departments = $query->latest()->get();
 
-        return response()->json($roles);
+        return response()->json($departments);
     }
 }

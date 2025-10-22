@@ -1,18 +1,18 @@
 <?php
 
-namespace App\Http\Controllers\Module;
+namespace App\Http\Controllers\Modules\Settings;
 
 use App\Http\Controllers\Controller;
-use App\Models\Position;
+use App\Models\Section;
 use Illuminate\Http\Request;
-use App\Http\Requests\StorePositionRequest;
-use App\Http\Requests\UpdatePositionRequest;
+use App\Http\Requests\StoreSectionRequest;
+use App\Http\Requests\UpdateSectionRequest;
 
-class PositionController extends Controller
+class SectionController extends Controller
 {
     public function index(Request $request)
     {
-        $query = Position::query()->latest();
+        $query = Section::query()->latest();
 
         if ($request->has("search")) {
             $search = $request->input("search");
@@ -20,64 +20,64 @@ class PositionController extends Controller
                 ->orWhere("code", "like", "%" . $search . "%");
         }
 
-        $positions = $query->paginate(10);
+        $sections = $query->paginate(10);
 
-        return view("contents.settings-positions", compact("positions"));
+        return view("contents.settings-sections", compact("sections"));
     }
 
-    public function store(StorePositionRequest $request)
+    public function store(StoreSectionRequest $request)
     {
         $validated = $request->validated();
 
-        $position = Position::create($validated);
+        $section = Section::create($validated);
 
         $notification = [
             'type' => 'success',
-            'message' => 'Jabatan baru berhasil ditambahkan.'
+            'message' => 'Bagian baru berhasil ditambahkan.'
         ];
 
         return back()->with('flash', $notification);
     }
 
-    public function update(UpdatePositionRequest $request, Position $position)
+    public function update(UpdateSectionRequest $request, Section $section)
     {
         $validated = $request->validated();
 
-        $position->update($validated);
+        $section->update($validated);
 
         $notification = [
             'type' => 'success',
-            'message' => 'Jabatan berhasil diperbarui.'
+            'message' => 'Bagian berhasil diperbarui.'
         ];
 
         return back()->with('flash', $notification);
     }
 
-    public function destroy(Position $position)
+    public function destroy(Section $section)
     {
-        $position->delete();
+        $section->delete();
 
-        $notification = [
+        $notifiation = [
             'type' => 'success',
-            'message' => 'Jabatan berhasil dihapus'
+            'message' => 'Bagian berhasil dihapus.'
         ];
 
-        return back()->with('flash', $notification);
+        return back()->with('flash', $notifiation);
     }
 
     public function search(Request $request)
     {
         $search = $request->input("search");
 
-        $query = Position::query();
+        $query = Section::query();
 
         if ($search) {
             $query->where("name", "like", "%{$search}%")
                 ->orWhere("code", "like", "%{$search}%");
         }
 
-        $positions = $query->latest()->get();
+        $sections = $query->latest()->get();
 
-        return response()->json($positions);
+        return response()->json($sections);
     }
 }

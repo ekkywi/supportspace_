@@ -1,18 +1,18 @@
 <?php
 
-namespace App\Http\Controllers\Module;
+namespace App\Http\Controllers\Modules\Settings;
 
 use App\Http\Controllers\Controller;
-use App\Models\Section;
+use App\Http\Requests\StoreRoleRequest;
+use App\Http\Requests\UpdateRoleRequest;
 use Illuminate\Http\Request;
-use App\Http\Requests\StoreSectionRequest;
-use App\Http\Requests\UpdateSectionRequest;
+use App\Models\Role;
 
-class SectionController extends Controller
+class RoleController extends Controller
 {
     public function index(Request $request)
     {
-        $query = Section::query()->latest();
+        $query = Role::query()->latest();
 
         if ($request->has("search")) {
             $search = $request->input("search");
@@ -20,64 +20,64 @@ class SectionController extends Controller
                 ->orWhere("code", "like", "%" . $search . "%");
         }
 
-        $sections = $query->paginate(10);
+        $roles = $query->paginate(10);
 
-        return view("contents.settings-sections", compact("sections"));
+        return view("contents.settings-roles", compact("roles"));
     }
 
-    public function store(StoreSectionRequest $request)
+    public function store(StoreRoleRequest $request)
     {
         $validated = $request->validated();
 
-        $section = Section::create($validated);
+        $role = Role::create($validated);
 
         $notification = [
             'type' => 'success',
-            'message' => 'Bagian baru berhasil ditambahkan.'
+            'message' => 'Peran baru berhasil ditambahkan.'
         ];
 
         return back()->with('flash', $notification);
     }
 
-    public function update(UpdateSectionRequest $request, Section $section)
+    public function update(UpdateRoleRequest $request, Role $role)
     {
         $validated = $request->validated();
 
-        $section->update($validated);
+        $role->update($validated);
 
         $notification = [
             'type' => 'success',
-            'message' => 'Bagian berhasil diperbarui.'
+            'message' => 'Peran berhasil diperbarui.'
         ];
 
         return back()->with('flash', $notification);
     }
 
-    public function destroy(Section $section)
+    public function destroy(Role $role)
     {
-        $section->delete();
+        $role->delete();
 
-        $notifiation = [
+        $notification = [
             'type' => 'success',
-            'message' => 'Bagian berhasil dihapus.'
+            'message' => 'Peran berhasil dihapus'
         ];
 
-        return back()->with('flash', $notifiation);
+        return back()->with('flash', $notification);
     }
 
     public function search(Request $request)
     {
         $search = $request->input("search");
 
-        $query = Section::query();
+        $query = Role::query();
 
         if ($search) {
             $query->where("name", "like", "%{$search}%")
                 ->orWhere("code", "like", "%{$search}%");
         }
 
-        $sections = $query->latest()->get();
+        $roles = $query->latest()->get();
 
-        return response()->json($sections);
+        return response()->json($roles);
     }
 }

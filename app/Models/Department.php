@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-
 class Department extends Model
 {
     use HasUuids, SoftDeletes;
@@ -15,4 +14,9 @@ class Department extends Model
         'name',
         'code'
     ];
+
+    public function users()
+    {
+        return $this->hasMany(User::class);
+    }
 }
