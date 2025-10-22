@@ -29,44 +29,11 @@
     <script src="{{ asset("js/custom-switcher.min.js") }}"></script>
     <script src="{{ asset("libs/choices.js/public/assets/scripts/choices.min.js") }}"></script>
     <script src="{{ asset("js/main.js") }}"></script>
+    <script src="{{ asset("libs/sweetalert2/sweetalert2.all.min.js") }}"></script>
+    <script src="{{ asset("js/notification.js") }}"></script>
 @endsection
 
 @section("content")
-    @php
-        $dummyRoles = [
-            [
-                "id" => 1,
-                "name" => "Administrator",
-                "code" => "ADMIN",
-                "users_count" => 3,
-            ],
-            [
-                "id" => 2,
-                "name" => "Manajer",
-                "code" => "MGR",
-                "users_count" => 5,
-            ],
-            [
-                "id" => 3,
-                "name" => "Staf IT",
-                "code" => "IT",
-                "users_count" => 8,
-            ],
-            [
-                "id" => 4,
-                "name" => "Staf HRD",
-                "code" => "HRD",
-                "users_count" => 4,
-            ],
-            [
-                "id" => 5,
-                "name" => "Karyawan",
-                "code" => "EMP",
-                "users_count" => 20,
-            ],
-        ];
-    @endphp
-
     <div class="container-fluid">
 
         <div class="d-md-flex d-block align-items-center justify-content-between my-4 page-header-breadcrumb">
@@ -83,14 +50,25 @@
                 <button class="btn btn-primary btn-wave" data-bs-target="#addRoleModal" data-bs-toggle="modal" type="button">
                     <i class="bi bi-plus-lg me-2"></i>Tambah Peran Baru
                 </button>
+                <a class="btn btn-info btn-wave" href="{{ route("settings.roles.archives.index") }}">
+                    <i class="bi bi-files me-2"></i>Lihat Arsip
+                </a>
             </div>
         </div>
 
         <div class="row">
             <div class="col-xl-12">
                 <div class="card custom-card">
-                    <div class="card-header">
+                    <div class="card-header d-flex flex-wrap justify-content-between align-items-center">
                         <h5 class="card-title my-auto">Daftar Peran</h5>
+                        <form action="{{ route("settings.roles.index") }}" method="GET">
+                            <div class="input-group">
+                                <input class="form-control" name="search" placeholder="Pencarian..." type="text" value="{{ request("search") }}">
+                                <button class="btn btn-primary" type="submit">
+                                    <i class="bi bi-search me-2"></i>Cari
+                                </button>
+                            </div>
+                        </form>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
@@ -100,28 +78,30 @@
                                         <th class="text-center" scope="col" style="width: 5%;">No.</th>
                                         <th class="text-center" scope="col">Nama Peran</th>
                                         <th class="text-center" scope="col">Kode Peran</th>
-                                        <th class="text-center" scope="col">Jumlah Anggota</th>
                                         <th class="text-center" scope="col" style="width: 15%;">Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @forelse ($dummyRoles as $role)
+                                    @forelse ($roles as $role)
                                         <tr>
                                             <td class="text-center">{{ $loop->iteration }}</td>
-                                            <td>{{ $role["name"] }}</td>
-                                            <td class="text-center">{{ $role["code"] }}</td>
-                                            <td class="text-center">{{ $role["users_count"] }}</td>
-                                            <td class="text-center">
+                                            <td class="text-center">{{ $role->name }}</td>
+                                            <td class="text-center">{{ $role->code }}</td>
+                                            <td>
                                                 <div class="btn-group">
-                                                    <button class="btn btn-sm btn-outline-info me-2" data-bs-target="#rolePermissionsModal{{ $role["id"] }}" data-bs-toggle="modal">
+                                                    <button class="btn btn-sm btn-outline-info me-2" data-bs-target="#rolePermissionModal{{ $role->id }}" data-bs-toggle="modal">
                                                         <i class="bi bi-key-fill me-1"></i> Hak Akses
                                                     </button>
-                                                    <button class="btn btn-sm btn-outline-secondary me-2" data-bs-target="#editRoleModal{{ $role["id"] }}" data-bs-toggle="modal">
+                                                    <button class="btn btn-sm btn-outline-secondary me-2" data-bs-target="#editRoleModal{{ $role->id }}" data-bs-toggle="modal">
                                                         <i class="bi bi-pencil-fill me-1"></i> Edit
                                                     </button>
-                                                    <button class="btn btn-sm btn-outline-danger" onclick="alert('Ini adalah aksi hapus dummy.');" type="button">
-                                                        <i class="bi bi-trash-fill me-1"></i> Hapus
-                                                    </button>
+                                                    <form action="{{ route("settings.roles.destroy", $role->id) }}" id="delete-form-{{ $role->id }}" method="POST" style="display: inline;">
+                                                        @csrf
+                                                        @method("DELETE")
+                                                        <button class="btn btn-sm btn-outline-danger delete-button" data-id="{{ $role->id }}" type="button">
+                                                            <i class="bi bi-trash-fill me-1"></i> Hapus
+                                                        </button>
+                                                    </form>
                                                 </div>
                                             </td>
                                         </tr>
@@ -137,15 +117,9 @@
                         </div>
                     </div>
                     <div class="card-footer">
-                        <nav aria-label="Page navigation">
-                            <ul class="pagination justify-content-end mb-0">
-                                <li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
-                                <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                <li class="page-item"><a class="page-link" href="#">Next</a></li>
-                            </ul>
-                        </nav>
+                        <div class="card-footer">
+                            {{ $roles->links() }}
+                        </div>
                     </div>
                 </div>
             </div>
@@ -161,7 +135,7 @@
                     <h5 class="modal-title" id="addRoleModalLabel">Tambah Peran Baru</h5>
                     <button aria-label="Close" class="btn-close" data-bs-dismiss="modal" type="button"></button>
                 </div>
-                <form action="javascript:void(0);" method="POST">
+                <form action="{{ route("settings.roles.store") }}" method="POST">
                     @csrf
                     <div class="modal-body">
                         <div class="mb-3">
@@ -184,25 +158,25 @@
     </div>
 
     {{-- Modal edit peran --}}
-    @foreach ($dummyRoles as $role)
-        <div aria-hidden="true" aria-labelledby="editRoleModalLabel{{ $role["id"] }}" class="modal fade" id="editRoleModal{{ $role["id"] }}" tabindex="-1">
+    @foreach ($roles as $role)
+        <div aria-hidden="true" aria-labelledby="editRoleModalLabel{{ $role->id }}" class="modal fade" id="editRoleModal{{ $role->id }}" tabindex="-1">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="editRoleModalLabel{{ $role["id"] }}">Edit Peran</h5>
+                        <h5 class="modal-title" id="editRoleModalLabel{{ $role->id }}">Edit Peran</h5>
                         <button aria-label="Close" class="btn-close" data-bs-dismiss="modal" type="button"></button>
                     </div>
-                    <form action="javascript:void(0);" method="POST">
+                    <form action="{{ route("settings.roles.update", $role->id) }}" method="POST">
                         @csrf
                         @method("PUT")
                         <div class="modal-body">
                             <div class="mb-3">
-                                <label class="form-label" for="name-{{ $role["id"] }}">Nama Peran</label>
-                                <input class="form-control" id="name-{{ $role["id"] }}" name="name" required type="text" value="{{ $role["name"] }}">
+                                <label class="form-label" for="name-{{ $role->id }}">Nama Peran</label>
+                                <input class="form-control" id="name-{{ $role->id }}" name="name" required type="text" value="{{ $role->name }}">
                             </div>
                             <div class="mb-3">
-                                <label class="form-label" for="code-{{ $role["id"] }}">Kode Peran</label>
-                                <input class="form-control" id="code-{{ $role["id"] }}" name="code" required type="text" value="{{ $role["code"] }}">
+                                <label class="form-label" for="code-{{ $role->id }}">Kode Peran</label>
+                                <input class="form-control" id="code-{{ $role->id }}" name="code" required type="text" value="{{ $role->name }}">
                                 <div class="form-text">Kode singkat untuk peran ini (maksimal 5 karakter).</div>
                             </div>
                         </div>

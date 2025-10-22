@@ -40,31 +40,31 @@
                     </a>
                 </li>
                 <li class="slide">
-                    <a class="side-menu__item {{ request()->routeIs("settings.departments.index") ? "active" : "" }}" href="{{ route("settings.departments.index") }}">
+                    <a class="side-menu__item {{ request()->routeIs("settings.departments.*") ? "active" : "" }}" href="{{ route("settings.departments.index") }}">
                         <i class="bx bx-shape-square side-menu__icon"></i>
                         <span class="side-menu__label">Departemen</span>
                     </a>
                 </li>
                 <li class="slide">
-                    <a class="side-menu__item {{ request()->routeIs("settings.sections.index") ? "active" : "" }}" href="{{ route("settings.sections.index") }}">
+                    <a class="side-menu__item {{ request()->routeIs("settings.sections.*") ? "active" : "" }}" href="{{ route("settings.sections.index") }}">
                         <i class="bx bx-pyramid side-menu__icon"></i>
                         <span class="side-menu__label">Bagian</span>
                     </a>
                 </li>
                 <li class="slide">
-                    <a class="side-menu__item {{ request()->routeIs("settings.positions.index") ? "active" : "" }}" href="{{ route("settings.positions.index") }}">
+                    <a class="side-menu__item {{ request()->routeIs("settings.positions.*") ? "active" : "" }}" href="{{ route("settings.positions.index") }}">
                         <i class="bx bx-briefcase side-menu__icon"></i>
                         <span class="side-menu__label">Jabatan</span>
                     </a>
                 </li>
                 <li class="slide">
-                    <a class="side-menu__item {{ request()->routeIs("settings.roles.index") ? "active" : "" }}" href="{{ route("settings.roles.index") }}">
+                    <a class="side-menu__item {{ request()->routeIs("settings.roles.*") ? "active" : "" }}" href="{{ route("settings.roles.index") }}">
                         <i class="bx bx-user-pin side-menu__icon"></i>
                         <span class="side-menu__label">Peran</span>
                     </a>
                 </li>
                 <li class="slide">
-                    <a class="side-menu__item {{ request()->routeIs("settings.permissions.index") ? "active" : "" }}" href="{{ route("settings.permissions.index") }}">
+                    <a class="side-menu__item {{ request()->routeIs("settings.permissions.*") ? "active" : "" }}" href="{{ route("settings.permissions.index") }}">
                         <i class="bx bx-universal-access side-menu__icon"></i>
                         <span class="side-menu__label">Hak Akses</span>
                     </a>

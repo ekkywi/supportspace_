@@ -1,7 +1,7 @@
 @extends("layouts.portal")
 
 @section("title")
-    SupportSpace &mdash; {{ config("app.name") }}
+    Daftar Aplikasi &mdash; {{ config("app.name") }}
 @endsection
 
 @section("styles")

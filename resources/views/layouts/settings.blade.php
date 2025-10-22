@@ -12,7 +12,11 @@
 
 </head>
 
-<body>
+<body @if (session("flash")) data-flash-type="{{ session("flash.type") }}"
+        data-flash-message="{{ session("flash.message") }}"
+    @elseif($errors->any())
+        data-flash-type="error"
+        data-flash-message="{{ $errors->first() }}" @endif>
 
     <div class="page">
         @include("components.header")
